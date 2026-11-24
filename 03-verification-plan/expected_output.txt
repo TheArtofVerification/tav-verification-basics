@@ -1,0 +1,37 @@
+Expected output, exactly as published in the lesson. Some blocks are trimmed there with '...'.
+
+# What output should you expect?
+
+[PHASE] Phase A, no plan
+[PLAN] F1 reset clears count and ovf  High checks=    1 goal=  1 fails=   0  MET
+[PLAN] F2 enable counts up by 1       Med  checks=  138 goal= 20 fails=   0  MET
+[PLAN] F3 no control: count holds     Low  checks=  163 goal= 10 fails=   0  MET
+[PLAN] F4 load takes ld_val           High checks=    0 goal=  5 fails=   0  HOLE
+[PLAN] F5 load beats enable           High checks=    0 goal=  5 fails=   0  HOLE
+[PLAN] F6 wrap 255->0, ovf one cycle  High checks=    0 goal=  2 fails=   0  HOLE
+[PLAN] F7 clear sets count to 0       Med  checks=    0 goal=  3 fails=   0  HOLE
+[PLAN] F8 clear beats load            High checks=    0 goal=  2 fails=   0  HOLE
+[VERDICT] Phase A, no plan: 3 MET, 5 HOLE, 0 FAIL, assertion fails=0, coverage=18.75%
+[SIGNOFF] Phase A, no plan: high/medium open=5, assertion fails=0, coverage=18.75% -> NOT READY
+[PHASES] Phase A, no plan: P1 sanity clean=yes, P2 coverage>=80%= no, P3 closure= no
+
+[PHASE] Phase B, from plan
+[PLAN] F1 reset clears count and ovf  High checks=    1 goal=  1 fails=   0  MET
+[PLAN] F2 enable counts up by 1       Med  checks= 1468 goal= 20 fails=   0  MET
+[PLAN] F3 no control: count holds     Low  checks=  307 goal= 10 fails=   0  MET
+[PLAN] F4 load takes ld_val           High checks=   35 goal=  5 fails=   0  MET
+[PLAN] F5 load beats enable           High checks=  125 goal=  5 fails=   0  MET
+[PLAN] F6 wrap 255->0, ovf one cycle  High checks=    6 goal=  2 fails=   0  MET
+[PLAN] F7 clear sets count to 0       Med  checks=   75 goal=  3 fails=   0  MET
+[PLAN] F8 clear beats load            High checks=    7 goal=  2 fails=   0  MET
+[VERDICT] Phase B, from plan: 8 MET, 0 HOLE, 0 FAIL, assertion fails=0, coverage=100.00%
+[SIGNOFF] Phase B, from plan: high/medium open=0, assertion fails=0, coverage=100.00% -> SIGN-OFF MET
+[PHASES] Phase B, from plan: P1 sanity clean=yes, P2 coverage>=80%=yes, P3 closure=yes
+
+# What output should you expect?
+
+UVM_ERROR @ 3165: uvm_test_top.env.scb [MISMATCH] after F2 enable counts up by 1: cnt=255(exp 255) ovf=1(exp 0)
+"testbench.sv", 79: tav_top.vif.A_OVF_AT_ZERO: started at 3165ns failed at 3165ns
+	Offending '(cnt == 8'b0)'
+UVM_ERROR @ 3165: reporter [SVA] A_OVF_AT_ZERO: ovf is high but cnt=255
+UVM_ERROR @ 3175: uvm_test_top.env.scb [MISMATCH] after F6 wrap 255->0, ovf one cycle: cnt=0(exp 0) ovf=0(exp 1)
