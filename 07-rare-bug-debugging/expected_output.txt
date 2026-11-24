@@ -1,0 +1,32 @@
+Expected output, exactly as published in the lesson. Some blocks are trimmed there with '...'.
+
+# What output should you expect?
+
+[SWEEP] trials=30 cycles_each=50 failing=0 seeds: none
+[SHRINK] nothing to shrink: no trial failed
+[DIRECTED] stall, then push and pop with 1 stored and write pointer 7: 21 cycles -> PASS
+[SUMMARY] assertion_fails=0
+
+# Step 1: sweep
+
+[SWEEP] trials=30 cycles_each=50 failing=3 seeds: 101 102 116
+
+# Step 1: sweep
+
+UVM_ERROR @ 935: uvm_test_top.env.scb [MISMATCH] seed 101, cycle 28: popped data=13, expected 26
+
+# Step 2: shrink
+
+[SHRINK] seed 101: fails in 50 cycles, still fails in the first 26 (found in 6 extra runs)
+
+# Step 3: read the window
+
+[WINDOW] cycle 24: stored=1 write_ptr=5 stalled_before=0 push=1 pop=1
+[WINDOW] cycle 25: stored=1 write_ptr=6 stalled_before=0 push=1 pop=1
+[WINDOW] cycle 26: stored=1 write_ptr=7 stalled_before=0 push=0 pop=0
+[WINDOW] cycle 27: stored=1 write_ptr=7 stalled_before=1 push=1 pop=1
+[WINDOW] cycle 28: stored=1 write_ptr=0 stalled_before=0 push=0 pop=1
+
+# Step 4: lock it in
+
+[DIRECTED] stall, then push and pop with 1 stored and write pointer 7: 21 cycles -> FAIL
