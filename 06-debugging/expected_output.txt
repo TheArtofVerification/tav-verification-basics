@@ -1,0 +1,19 @@
+Expected output, exactly as published in the lesson. Some blocks are trimmed there with '...'.
+
+# What output should you expect?
+
+[E2E] packets=300 mismatches=0 assertion_fails=0 -> PASS
+[CLUES] failing packets=0: back_to_back=0 one_byte=0 longer_than_31=0
+[LOCATE] checkpoint fails: S1=0 S2=0 OUT=0, first divergence: none, every checkpoint agrees with the model
+
+# BUG=1: the clue points the right way
+
+UVM_ERROR @ 1775: uvm_test_top.env.scb [E2E] packet 6: out_len=59 out_sum=7483, expected len=27 sum=3090
+
+# BUG=2: the clue is most of the story
+
+UVM_ERROR @ 415: uvm_test_top.env.scb [E2E] packet 1: out_len=4 out_sum=4317, expected len=36 sum=4317
+
+# BUG=3: the same clue, a different stage
+
+UVM_ERROR @ 5625: uvm_test_top.env.scb [E2E] packet 29: out_len=4 out_sum=185, expected len=1 sum=213
