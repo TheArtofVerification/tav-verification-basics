@@ -1,0 +1,14 @@
+Expected output, exactly as published in the lesson. Some blocks are trimmed there with '...'.
+
+# What output should you expect?
+
+[STAGE] Stage 1, sanity
+[RESULT] Stage 1, sanity: checks=10 mismatches=0 assertion_fails=0 max_wait=0 (limit 3) fairness_violations=0 pattern_coverage=12.50% -> PASS
+[STAGE] Stage 2, feature
+[RESULT] Stage 2, feature: checks=327 mismatches=0 assertion_fails=0 max_wait=3 (limit 3) fairness_violations=0 pattern_coverage=75.00% -> PASS
+[STAGE] Stage 3, closure
+[RESULT] Stage 3, closure: checks=2003 mismatches=0 assertion_fails=0 max_wait=3 (limit 3) fairness_violations=0 pattern_coverage=100.00% -> PASS
+
+# What output should you expect?
+
+UVM_ERROR @ 3625: uvm_test_top.env.scb [MISMATCH] req=1101 last=3: gnt=0100 (exp 0001)
