@@ -1,0 +1,26 @@
+Expected output, exactly as published in the lesson. Some blocks are trimmed there with '...'.
+
+# Does the method catch real bugs? A 4-bit ALU on VCS
+
+Running with BUG=0
+SUMMARY BUG=0 checked=2048 errors=0 coverage=100.00%
+
+# Does the method catch real bugs? A 4-bit ALU on VCS
+
+Running with BUG=1
+MISMATCH op=001 a=0 b=0 : got r=0 c=1 v=0, expected r=0 c=0 v=0
+MISMATCH op=001 a=0 b=1 : got r=15 c=0 v=0, expected r=15 c=1 v=0
+MISMATCH op=001 a=0 b=2 : got r=14 c=0 v=0, expected r=14 c=1 v=0
+SUMMARY BUG=1 checked=2048 errors=256 coverage=100.00%
+
+# Does the method catch real bugs? A 4-bit ALU on VCS
+
+Running with BUG=2
+MISMATCH op=101 a=7 b=0 : got r=8 c=0 v=0, expected r=8 c=0 v=1
+SUMMARY BUG=2 checked=2048 errors=16 coverage=100.00%
+
+# Does the method catch real bugs? A 4-bit ALU on VCS
+
+Running with BUG=3
+MISMATCH op=111 a=15 b=0 : got r=15 c=1 v=0, expected r=7 c=1 v=0
+SUMMARY BUG=3 checked=2048 errors=16 coverage=100.00%
