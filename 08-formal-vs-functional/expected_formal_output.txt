@@ -1,0 +1,9 @@
+# +BUG=1 formal run, as shown in the lesson (trimmed)
+
+##   0:00:00  Solver: z3
+##   0:00:00  Checking assertions in step 0..
+...
+##   0:00:00  Checking assertions in step 9..
+##   0:00:00  BMC failed!
+##   0:00:00  Assert failed in tav_fv_top: tav_formal_vs_sim_fv.sv:61.35-61.57
+##   0:00:00  Status: FAILED

@@ -1,0 +1,26 @@
+Expected output, exactly as published in the lesson. Some blocks are trimmed there with '...'.
+
+# What output should you expect from simulation?
+
+UVM_INFO testbench.sv(309) @ 1000036: uvm_test_top.env.scb [RESULT] RANDOM 100k cycles: cycles=100002 mismatches=0 both_granted=0 assertion_fails=0                     -> PASS
+UVM_INFO testbench.sv(312) @ 1000036: uvm_test_top.env.scb [DEPTH] RANDOM 100k cycles: deepest unlock step reached=4 of 6, debug mode reached= no
+UVM_INFO testbench.sv(309) @ 1000156: uvm_test_top.env.scb [RESULT] REPLAY formal trace: cycles=10 mismatches=0 both_granted=0 assertion_fails=0                     -> PASS
+UVM_INFO testbench.sv(312) @ 1000156: uvm_test_top.env.scb [DEPTH] REPLAY formal trace: deepest unlock step reached=6 of 6, debug mode reached=yes
+
+# What output should you expect from simulation?
+
+UVM_ERROR testbench.sv(298) @ 1000145: uvm_test_top.env.scb [MISMATCH] cycle 9: gnt=11, expected 10
+"testbench.sv", 89: tav_top.vif.A_MUTEX: started at 1000145ns failed at 1000145ns
+	Offending '(gnt != 2'b11)'
+UVM_ERROR testbench.sv(92) @ 1000145: reporter [SVA] A_MUTEX: both requesters granted (req=00)
+UVM_INFO testbench.sv(309) @ 1000156: uvm_test_top.env.scb [RESULT] REPLAY formal trace: cycles=10 mismatches=1 both_granted=1 assertion_fails=1                     -> FAIL
+UVM_INFO testbench.sv(312) @ 1000156: uvm_test_top.env.scb [DEPTH] REPLAY formal trace: deepest unlock step reached=6 of 6, debug mode reached=yes
+
+# What output should you expect from simulation?
+
+UVM_ERROR testbench.sv(298) @ 305: uvm_test_top.env.scb [MISMATCH] cycle 29: gnt=11, expected 01
+...
+UVM_INFO testbench.sv(94) @ 465: reporter [SVA_OFF] A_MUTEX switched off for the rest of this phase after 3 fails
+UVM_INFO testbench.sv(309) @ 1000036: uvm_test_top.env.scb [RESULT] RANDOM 100k cycles: cycles=100002 mismatches=4366 both_granted=3277 assertion_fails=3 (then switched off) -> FAIL
+UVM_INFO testbench.sv(312) @ 1000036: uvm_test_top.env.scb [DEPTH] RANDOM 100k cycles: deepest unlock step reached=4 of 6, debug mode reached= no
+UVM_INFO testbench.sv(309) @ 1000156: uvm_test_top.env.scb [RESULT] REPLAY formal trace: cycles=10 mismatches=0 both_granted=0 assertion_fails=0                     -> PASS
