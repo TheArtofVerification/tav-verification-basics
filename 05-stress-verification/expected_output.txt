@@ -1,0 +1,18 @@
+Expected output, exactly as published in the lesson. Some blocks are trimmed there with '...'.
+
+# What output should you expect?
+
+[RESULT] A  normal random: pushes=380 pops=380 mismatches=0 assertion_fails=0 max_stall=0 -> PASS
+[CORNERS] A  normal random: full=0 full_push_pop=0 long_backpressure=0 reset_with_data=0 (0 of 4 stress corners hit)
+[RESULT] B1 stress: throughput: pushes=300 pops=300 mismatches=0 assertion_fails=0 max_stall=0 -> PASS
+[CORNERS] B1 stress: throughput: full=0 full_push_pop=0 long_backpressure=0 reset_with_data=0 (0 of 4 stress corners hit)
+[RESULT] B2 stress: back-pressure: pushes=104 pops=101 mismatches=0 assertion_fails=0 max_stall=20 -> PASS
+[CORNERS] B2 stress: back-pressure: full=197 full_push_pop=100 long_backpressure=5 reset_with_data=0 (3 of 4 stress corners hit)
+[RESULT] B3 stress: squeeze: pushes=246 pops=244 mismatches=0 assertion_fails=0 max_stall=10 -> PASS
+[CORNERS] B3 stress: squeeze: full=441 full_push_pop=190 long_backpressure=1 reset_with_data=1 (4 of 4 stress corners hit)
+[RESULT] B4 stress: reset mid-flow: pushes=111 pops=89 mismatches=0 assertion_fails=0 max_stall=5 -> PASS
+[CORNERS] B4 stress: reset mid-flow: full=108 full_push_pop=50 long_backpressure=0 reset_with_data=6 (3 of 4 stress corners hit)
+
+# What output should you expect?
+
+UVM_ERROR @ 13355: uvm_test_top.env.scb [MISMATCH] popped data=1, expected 21
