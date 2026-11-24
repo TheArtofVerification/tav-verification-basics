@@ -1,0 +1,26 @@
+Expected output, exactly as published in the lesson. Some blocks are trimmed there with '...'.
+
+# What output should you expect?
+
+UVM_INFO @ 0: reporter [RNTST] Running test tav_fifo_test...
+UVM_INFO @ 0: uvm_test_top.env.scb [TEST] T1 happy path (4 in, 4 out)
+UVM_INFO @ 116: uvm_test_top.env.scb [RESULT] PASS, 0 mismatches
+UVM_INFO @ 116: uvm_test_top.env.scb [TEST] T2 fill to 16, check full
+UVM_INFO @ 326: uvm_test_top.env.scb [RESULT] PASS, 0 mismatches
+UVM_INFO @ 326: uvm_test_top.env.scb [TEST] T3 write while full, then drain
+UVM_INFO @ 716: uvm_test_top.env.scb [RESULT] PASS, 0 mismatches
+UVM_INFO @ 716: uvm_test_top.env.scb [TEST] T4 read while empty
+UVM_INFO @ 806: uvm_test_top.env.scb [RESULT] PASS, 0 mismatches
+UVM_INFO @ 806: uvm_test_top.env.scb [TEST] T5 48 items through, pointers wrap
+UVM_INFO @ 1406: uvm_test_top.env.scb [RESULT] PASS, 0 mismatches
+UVM_INFO @ 1406: uvm_test_top.env.scb [TEST] T6 random mix, 2000 cycles
+UVM_INFO @ 21446: uvm_test_top.env.scb [RESULT] PASS, 0 mismatches
+UVM_INFO @ 21446: uvm_test_top.env.scb [CORNERS] full=29 write_while_full=13 read_while_empty=45 both_same_cycle=491 pointer_wraps=61
+UVM_INFO @ 21446: uvm_test_top.env.scb [SUMMARY] total_mismatches=0
+...
+UVM_ERROR :    0
+UVM_FATAL :    0
+
+# What output should you expect?
+
+UVM_ERROR @ 1085: uvm_test_top.env.scb [MISMATCH] stored=8 full=0(exp 0) empty=0(exp 0) dout=18(exp 17)
