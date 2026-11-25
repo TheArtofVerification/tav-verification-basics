@@ -1,0 +1,45 @@
+Synopsys VCS X-2025.06-SP1, UVM 1.2, EDA Playground, 25 Nov 2026. File: tav_ral_apb_uvm.sv
+Compile options: -debug_access+all   Top module: tav_top
+Clean run: the step 0 model print and the RESULT lines as printed. Bug runs: which phases fail,
+the error count per phase, and the first error line.
+
+== No option ==
+UVM_INFO testbench.sv(607) @ 45: reporter@@s0 [TOUR]    0x00  regmodel.ip.ctrl       | en [0:0] RW reset 0x0          | mode [2:1] RW reset 0x0          | prescale [7:4] RW reset 0x4
+UVM_INFO testbench.sv(607) @ 45: reporter@@s0 [TOUR]    0x04  regmodel.ip.id         | id [15:0] RO reset 0x5a01
+UVM_INFO testbench.sv(607) @ 45: reporter@@s0 [TOUR]    0x08  regmodel.ip.int_stat   | pending [3:0] W1C reset 0x0 volatile
+UVM_INFO testbench.sv(607) @ 45: reporter@@s0 [TOUR]    0x0c  regmodel.ip.int_en     | enable [3:0] RW reset 0x0
+UVM_INFO testbench.sv(607) @ 45: reporter@@s0 [TOUR]    0x1c  regmodel.ip.scratch    | data [31:0] RW reset 0x0
+UVM_INFO testbench.sv(607) @ 45: reporter@@s0 [TOUR]    0x80  regmodel.dma.ch0.src   | data [31:0] RW reset 0x0
+UVM_INFO testbench.sv(607) @ 45: reporter@@s0 [TOUR]    0x90  regmodel.dma.ch1.src   | data [31:0] RW reset 0x0
+UVM_INFO testbench.sv(607) @ 45: reporter@@s0 [TOUR]    0x84  regmodel.dma.ch0.len   | len [15:0] RW reset 0x40
+UVM_INFO testbench.sv(607) @ 45: reporter@@s0 [TOUR]    0x94  regmodel.dma.ch1.len   | len [15:0] RW reset 0x40
+UVM_INFO testbench.sv(611) @ 45: reporter@@s0 [TOUR]    0x40  regmodel.ip.buffer     | memory, 16 words of 32 bits, RW
+UVM_INFO testbench.sv(613) @ 45: reporter@@s0 [TOUR]    default_map: 4-byte bus, base 0x0; dbg_map holds 4 registers
+...
+UVM_INFO testbench.sv(887) @ 54525: uvm_test_top [RESULT] Phase 0 tour of the methods      : APB reads=23 writes=17 errors=0 -> PASS
+UVM_INFO testbench.sv(887) @ 54525: uvm_test_top [RESULT] Phase 1 hw_reset (built-in)      : APB reads=13 writes=0 errors=0 -> PASS
+UVM_INFO testbench.sv(887) @ 54525: uvm_test_top [RESULT] Phase 2 bit_bash (built-in)      : APB reads=824 writes=824 errors=0 -> PASS
+UVM_INFO testbench.sv(887) @ 54525: uvm_test_top [RESULT] Phase 3 paths/access/walk/shared : APB reads=44 writes=51 errors=0 -> PASS
+UVM_INFO testbench.sv(887) @ 54525: uvm_test_top [RESULT] Phase 4 W1C (targeted)           : APB reads=5 writes=4 errors=0 -> PASS
+UVM_INFO testbench.sv(887) @ 54525: uvm_test_top [RESULT] Phase 5 alias (targeted)         : APB reads=5 writes=3 errors=0 -> PASS
+UVM_WARNING: 4 (2 x UVM/RSRC/NOREGEX at time 0, the tour step 3 field-write warning, the access test skipping ID)
+UVM_ERROR: 0
+
+== +BUG=1 (CTRL resets to 0x00 instead of 0x40) ==
+Phase 0 tour: 2 errors -> FAIL     Phase 1 hw_reset: 1 error -> FAIL     Phases 2 to 5: PASS
+UVM_ERROR testbench.sv(529) @ 76: reporter@@s0 [TAV_CHECK] [phase 0] step 1, read after reset: ctrl read 0x0, expected 0x40
+UVM_ERROR .../uvm_reg.svh(2950) @ 1336: reporter [RegModel] [phase 1] Register "regmodel.ip.ctrl" value read from DUT (0x0000000000000000) does not match mirrored value (0x0000000000000040)
+
+== +BUG=2 (INT_STAT acts as RW instead of W1C) ==
+Phase 0 tour: 2 errors -> FAIL     Phase 4 W1C: 5 errors -> FAIL     Phases 1, 2, 3, 5: PASS
+UVM_ERROR testbench.sv(529) @ 536: reporter@@s0 [TAV_CHECK] [phase 0] step 7, after writing 1 to bit 0: int_stat read 0x1, expected 0x2
+UVM_ERROR testbench.sv(529) @ 54046: reporter@@s4 [TAV_CHECK] [phase 4] after writing 1 to every bit: int_stat read 0xf, expected 0x0
+
+== +BUG=3 (ID is writable) ==
+Phase 2 bit_bash: 32 errors -> FAIL     Phases 0, 1, 3, 4, 5: PASS
+UVM_ERROR .../uvm_reg_bit_bash_seq.svh(183) @ 5596: reporter@@s2.reg_single_bit_bash_seq [uvm_reg_bit_bash_seq] [phase 2] Writing a 0 in bit #0 of register "regmodel.ip.id" with initial value 'h0000000000005a01 yielded 'h0000000000005a00 instead of 'h0000000000005a01
+
+== +BUG=4 (INT_EN decode alias: any address ending in 0xC) ==
+Phase 0 tour: 1 error -> FAIL     Phase 5 alias: 1 error -> FAIL     Phases 1 to 4: PASS
+UVM_ERROR .../uvm_reg.svh(2950) @ 406: reporter [RegModel] [phase 0] Register "regmodel.ip.int_en" value read from DUT (0x000000000000000f) does not match mirrored value (0x0000000000000002)
+UVM_ERROR .../uvm_reg.svh(2950) @ 54476: reporter [RegModel] [phase 5] Register "regmodel.ip.int_en" value read from DUT (0x0000000000000008) does not match mirrored value (0x000000000000000a)

@@ -1,0 +1,22 @@
+Synopsys VCS X-2025.06-SP1, UVM 1.2, EDA Playground, 25 Nov 2026. File: tav_ral_ai_check.sv
+This file is the bench version before tour step 17 existed, with an AI-written tav_reg_block.
+Without step 17, the tour leaves two DMA registers written, so phase 1 (hw_reset) fails
+with 2 errors even on the clean design. That is the bug in the bench that step 17 fixed.
+
+== No option ==
+UVM_INFO testbench.sv(903) @ 54445: uvm_test_top [RESULT] Phase 0 tour of the methods      : APB reads=21 writes=17 errors=0 -> PASS
+UVM_INFO testbench.sv(903) @ 54445: uvm_test_top [RESULT] Phase 1 hw_reset (built-in)      : APB reads=13 writes=0 errors=2 -> FAIL
+UVM_INFO testbench.sv(903) @ 54445: uvm_test_top [RESULT] Phase 2 bit_bash (built-in)      : APB reads=824 writes=824 errors=0 -> PASS
+UVM_INFO testbench.sv(903) @ 54445: uvm_test_top [RESULT] Phase 3 paths/access/walk/shared : APB reads=44 writes=51 errors=0 -> PASS
+UVM_INFO testbench.sv(903) @ 54445: uvm_test_top [RESULT] Phase 4 W1C (targeted)           : APB reads=5 writes=4 errors=0 -> PASS
+UVM_INFO testbench.sv(903) @ 54445: uvm_test_top [RESULT] Phase 5 alias (targeted)         : APB reads=5 writes=3 errors=0 -> PASS
+The two phase 1 errors: regmodel.dma.ch0.src read 0xa5a50001 (mirror 0x0), regmodel.dma.ch1.len read 0x200 (mirror 0x40).
+UVM_WARNING: 3 (no "has only RO fields ... skipping" line for ID: the AI model excludes ID from the access test itself)
+
+== Bug runs: errors per phase ==
+           tour  hw_reset  bit_bash  paths/access/walk/shared  W1C  alias
++BUG=1      2       3         -              -                  -     -
++BUG=2      2       2         -              -                  5     -
++BUG=3      -       2        32              -                  -     -
++BUG=4      1       3         -              -                  -     1
+(hw_reset counts include the same 2 leftover-DMA errors as the clean run. "-" = PASS.)
