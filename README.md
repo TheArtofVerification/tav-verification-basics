@@ -17,6 +17,12 @@ Each lesson takes one small design, plants bugs in it, and shows a bench finding
 | 7 | [How to Solve a Complex Verification Issue: Reproduce, Shrink and Isolate a Rare Bug](https://theartofverification.com/intermittent-bug-debugging/) | [`07-rare-bug-debugging`](07-rare-bug-debugging/) | `tav_top` |
 | 8 | [Formal vs Functional Verification: What Each One Proves, With a Real Example](https://theartofverification.com/formal-vs-functional-verification/) | [`08-formal-vs-functional`](08-formal-vs-functional/) | `tav_top` |
 
+## Bonus
+
+| Post | Folder |
+|---|---|
+| [Where to Use Formal Verification: A Fit Test on Three Real Blocks](https://theartofverification.com/where-to-use-formal-verification/) | [`bonus-where-to-use-formal`](bonus-where-to-use-formal/) |
+
 ## How to run any demo
 
 1. Open [EDA Playground](https://www.edaplayground.com/) and sign in (free).
