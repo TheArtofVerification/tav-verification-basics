@@ -22,6 +22,7 @@ Each lesson takes one small design, plants bugs in it, and shows a bench finding
 | Post | Folder |
 |---|---|
 | [Where to Use Formal Verification: A Fit Test on Three Real Blocks](https://theartofverification.com/where-to-use-formal-verification/) | [`bonus-where-to-use-formal`](bonus-where-to-use-formal/) |
+| [Clock Multiplication vs Division: How Each Works and How to Verify It](https://theartofverification.com/clock-multiplication-vs-division/) | [`bonus-clock-multiplication-vs-division`](bonus-clock-multiplication-vs-division/) |
 
 ## How to run any demo
 
