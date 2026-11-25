@@ -1,0 +1,22 @@
+Synopsys VCS X-2025.06-SP1, EDA Playground, 25 Nov 2026. Summary block of the AI checker.
+
+== No option (clean design: every error is a false alarm) ==
+  Periods checked        : 8371
+  Period errors          : 33
+  Duty-cycle errors      : 43
+  Stall errors           : 6
+  Lock events seen       : 28
+  Lock errors            : 0
+  TOTAL ERRORS           : 82
+  RESULT                 : FAIL
+(+BUG=1 and +BUG=2 are divider bugs and give the same 82.)
+
+== +BUG=3 (PLL locks early) ==
+  Periods checked        : 8733
+  Period errors          : 395
+  Duty-cycle errors      : 407
+  Stall errors           : 6
+  Lock events seen       : 28
+  Lock errors            : 0
+  TOTAL ERRORS           : 808
+  RESULT                 : FAIL
