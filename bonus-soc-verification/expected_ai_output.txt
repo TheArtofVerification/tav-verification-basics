@@ -1,0 +1,11 @@
+Synopsys VCS X-2025.06-SP1, EDA Playground, 25 Nov 2026.
+The AI-written test's own summary for each run (top module tav_ai_top).
+
+Run                          Checks   Errors  First error
+(none)                       20,749   0       none: PASS
++BUG=1 mux mode 2            20,749   497     T5 mode=2: UART.STATUS got 0, expected 1
++BUG=2 irq lines swapped     20,749   879     T6: IRQ_STATUS got 0x4, expected 0x2
++BUG=3 irq_n polarity        20,749   2,779   in reset: irq_n got 0, expected 1
++BUG=4 decode alias          20,749   1,701   T2 TIMER.CTRL write: SPI.CTRL got 0x78, expected 0xA4
+
+Simulated time: 332,081 ns per run (the UVM bench: 338 checks in 2,395 ns).

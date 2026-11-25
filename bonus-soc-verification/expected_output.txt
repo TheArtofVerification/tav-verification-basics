@@ -1,0 +1,29 @@
+Synopsys VCS X-2025.06-SP1, UVM 1.2, EDA Playground, 25 Nov 2026.
+Clean run: the RESULT and REACH lines as printed. Bug runs: which phases fail, the mismatch
+counts per kind (REG = register read, PIN = pads, IRQ = interrupt pin), and the first MISMATCH line.
+
+== No option ==
+[RESULT] Phase 1 smoke  : reads=4 wrong=0 | pad cycles=12 wrong=0 | irq pin cycles=12 wrong=0 -> PASS
+[RESULT] Phase 2 regs   : reads=27 wrong=0 | pad cycles=42 wrong=0 | irq pin cycles=42 wrong=0 -> PASS
+[RESULT] Phase 3 alias  : reads=5 wrong=0 | pad cycles=10 wrong=0 | irq pin cycles=10 wrong=0 -> PASS
+[RESULT] Phase 4 pin mux: reads=48 wrong=0 | pad cycles=123 wrong=0 | irq pin cycles=123 wrong=0 -> PASS
+[RESULT] Phase 5 irq    : reads=18 wrong=0 | pad cycles=49 wrong=0 | irq pin cycles=49 wrong=0 -> PASS
+[REACH] pin-mux modes with an output toggled=4 of 4, blocks that raised an interrupt=3 of 3
+102 register reads and 236 pin cycles checked, 2,395 ns of simulated time.
+
+== +BUG=1 (pin mux mode 2) ==
+Fails phase 4 only: 4 PIN, 4 REG. Phases 1, 2, 3 and 5 pass.
+[MISMATCH] phase 4 PIN: mode 2: pads=00, expected 10
+[MISMATCH] phase 4 REG: read 0x04 (mode 2, pads in 10) = 0x0, expected 0x1
+
+== +BUG=2 (interrupt lines swapped) ==
+Fails phase 5 only: 4 REG, 0 IRQ (phase 5 only uses masks 111 and 000).
+[MISMATCH] phase 5 REG: read 0xc4 (mode 3, pads in 00) = 0x4, expected 0x2
+
+== +BUG=3 (interrupt pin polarity) ==
+Fails every phase on the interrupt pin: IRQ 12, 42, 10, 123, 49.
+[MISMATCH] phase 1 IRQ: IRQ_STATUS=000 mask=000: irq_n=0, expected 1
+
+== +BUG=4 (decode alias) ==
+Fails phase 3 (1 REG), phase 4 (4 PIN) and phase 5 (2 REG). Phases 1 and 2 pass.
+[MISMATCH] phase 3 REG: read 0x40 (mode 0, pads in 00) = 0x3c, expected 0x28
