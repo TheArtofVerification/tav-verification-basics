@@ -23,6 +23,7 @@ Each lesson takes one small design, plants bugs in it, and shows a bench finding
 |---|---|
 | [Where to Use Formal Verification: A Fit Test on Three Real Blocks](https://theartofverification.com/where-to-use-formal-verification/) | [`bonus-where-to-use-formal`](bonus-where-to-use-formal/) |
 | [Clock Multiplication vs Division: How Each Works and How to Verify It](https://theartofverification.com/clock-multiplication-vs-division/) | [`bonus-clock-multiplication-vs-division`](bonus-clock-multiplication-vs-division/) |
+| [RISC-V Verification: Check Every Instruction Against an ISS Golden Model](https://theartofverification.com/risc-v-verification/) | [`bonus-risc-v-verification`](bonus-risc-v-verification/) |
 
 ## How to run any demo
 
