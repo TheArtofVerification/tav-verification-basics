@@ -1,0 +1,34 @@
+Expected output from the UVM bench, exactly as published in the post. Some blocks are trimmed with '...'.
+Run on Synopsys VCS X-2025.06-SP1 with UVM 1.2 (EDA Playground), 25 Nov 2026.
+
+# No option
+
+UVM_INFO testbench.sv(329) @ 200036: uvm_test_top.env.scb [RESULT] ARB  checks=20002 mismatches=0 assertion_fails=0 -> PASS
+UVM_INFO testbench.sv(329) @ 200036: uvm_test_top.env.scb [RESULT] FIFO checks=20002 mismatches=0 assertion_fails=0 -> PASS
+UVM_INFO testbench.sv(329) @ 200036: uvm_test_top.env.scb [RESULT] MULT checks=20002 mismatches=0 assertion_fails=0 -> PASS
+UVM_INFO testbench.sv(332) @ 200036: uvm_test_top.env.scb [REACH] ARB  longest wait=4 cycles, grants to requester 2 followed by a request=4356
+UVM_INFO testbench.sv(333) @ 200036: uvm_test_top.env.scb [REACH] FIFO cycles full=1408, pushes while full=688
+UVM_INFO testbench.sv(334) @ 200036: uvm_test_top.env.scb [REACH] MULT cycles=20002, times a and b were both 0xFFFF=0
+
+# +BUG=1
+
+UVM_ERROR testbench.sv(283) @ 165: uvm_test_top.env.scb [MISMATCH] ARB cycle 15: gnt=0010, expected 0001
+UVM_ERROR testbench.sv(283) @ 175: uvm_test_top.env.scb [MISMATCH] FIFO cycle 16: dout=x, expected 170
+...
+UVM_INFO testbench.sv(329) @ 200036: uvm_test_top.env.scb [RESULT] ARB  checks=20002 mismatches=4078 assertion_fails=0 -> FAIL
+UVM_INFO testbench.sv(329) @ 200036: uvm_test_top.env.scb [RESULT] FIFO checks=20002 mismatches=16475 assertion_fails=0 -> FAIL
+UVM_INFO testbench.sv(329) @ 200036: uvm_test_top.env.scb [RESULT] MULT checks=20002 mismatches=0 assertion_fails=0 -> PASS
+UVM_INFO testbench.sv(332) @ 200036: uvm_test_top.env.scb [REACH] ARB  longest wait=7 cycles, grants to requester 2 followed by a request=4356
+UVM_INFO testbench.sv(334) @ 200036: uvm_test_top.env.scb [REACH] MULT cycles=20002, times a and b were both 0xFFFF=0
+
+# +BUG=2
+
+UVM_ERROR testbench.sv(283) @ 35: uvm_test_top.env.scb [MISMATCH] ARB cycle 2: gnt=1000, expected 0000
+UVM_ERROR testbench.sv(115) @ 35: reporter [SVA] A_ARB_ASKED: gnt=1000, req last cycle=0000
+...
+UVM_ERROR testbench.sv(283) @ 715: uvm_test_top.env.scb [MISMATCH] FIFO cycle 70: count=9 full=0 empty=0, expected count=8
+UVM_ERROR testbench.sv(120) @ 715: reporter [SVA] A_FIFO_FLAGS: count=9 full=0 empty=0
+...
+UVM_INFO testbench.sv(329) @ 200036: uvm_test_top.env.scb [RESULT] ARB  checks=20002 mismatches=1263 assertion_fails=3 (assertions switched off after 3) -> FAIL
+UVM_INFO testbench.sv(329) @ 200036: uvm_test_top.env.scb [RESULT] FIFO checks=20002 mismatches=11786 assertion_fails=3 (assertions switched off after 3) -> FAIL
+UVM_INFO testbench.sv(329) @ 200036: uvm_test_top.env.scb [RESULT] MULT checks=20002 mismatches=0 assertion_fails=0 -> PASS

@@ -1,0 +1,25 @@
+Formal results from tav_where_formal_fv.sv, as published in the post.
+Run on Yosys 0.33, yosys-smtbmc and Z3 4.8.12, 24 Nov 2026. Times are wall-clock on one machine.
+
+Block       Run                                  Result
+----------  -----------------------------------  ---------------------------------------
+Arbiter     BUG=0, bounded check, 20 steps       PASSED in 0.98 s
+Arbiter     BUG=0, induction                     PASSED in 0.24 s
+Arbiter     BUG=1                                FAILED at step 7
+Arbiter     BUG=2                                FAILED at step 3
+FIFO        BUG=0, bounded check, 20 steps       PASSED in 2.56 s
+FIFO        BUG=0, induction                     PASSED in 0.19 s (with the 4 helper facts)
+FIFO        BUG=1                                FAILED at step 9
+FIFO        BUG=2                                FAILED at step 11
+FIFO        BUG=0, induction, helper facts off   FAILED (data-order check, 20 steps back)
+
+Multiplier, -t 1 (no state, so one step covers every a and b)
+Width   prove p == a * b (BUG=0)    find the bad pair (BUG=1)
+4       0.10 s                      0.08 s
+5       0.16 s                      0.10 s
+6       0.53 s                      0.18 s
+7       2.71 s                      0.55 s
+8       14.20 s                     1.56 s
+9       103.65 s                    3.76 s
+10      515.81 s                    8.00 s
+12      no answer in 15 minutes     not found in 15 minutes
