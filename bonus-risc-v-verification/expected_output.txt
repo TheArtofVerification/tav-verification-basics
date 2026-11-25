@@ -1,0 +1,34 @@
+Synopsys VCS X-2025.06-SP1, UVM 1.2, EDA Playground, 25 Nov 2026.
+RESULT and REACH lines, plus the first MISMATCH line where there is one.
+
+== No option ==
+[RESULT] Phase 1 directed: programs=1 failed=0 instructions compared=36 -> PASS
+[RESULT] Phase 2 random:   programs=20 failed=0 instructions compared=3091 -> PASS
+[RESULT] Phase 3 encodings: programs=200 failed=0 instructions compared=675 -> PASS
+[REACH] Phase 1: SLT/SLTI with a negative operand=0, results aimed at x0=0, branches taken forward=0, backward=9
+[REACH] Phase 2: SLT/SLTI with a negative operand=85, results aimed at x0=259, branches taken forward=263, backward=0
+[REACH] Phase 3: encodings outside the subset=95 of 200
+
+== +BUG=1 ==
+[MISMATCH] random 1, instruction 99: core pc=0000020c insn=f530a093 x1<=00000001 next_pc=00000210 | ISS pc=0000020c insn=f530a093 x1<=00000000 next_pc=00000210
+[RESULT] Phase 1 directed: programs=1 failed=0 instructions compared=36 -> PASS
+[RESULT] Phase 2 random:   programs=20 failed=19 instructions compared=930 -> FAIL
+[RESULT] Phase 3 encodings: programs=200 failed=1 instructions compared=674 -> FAIL
+
+== +BUG=2 ==
+[MISMATCH] random 1, instruction 55: core pc=00000144 insn=a6c9e037 x0<=a6c9e000 next_pc=00000148 | ISS pc=00000144 insn=a6c9e037 next_pc=00000148
+[RESULT] Phase 1 directed: programs=1 failed=0 instructions compared=36 -> PASS
+[RESULT] Phase 2 random:   programs=20 failed=20 instructions compared=299 -> FAIL
+[RESULT] Phase 3 encodings: programs=200 failed=1 instructions compared=674 -> FAIL
+
+== +BUG=3 ==
+[MISMATCH] sum 1 to 10, instruction 5: core pc=00000010 insn=fe009ce3 next_pc=00002008 | ISS pc=00000010 insn=fe009ce3 next_pc=00000008
+[RESULT] Phase 1 directed: programs=1 failed=1 instructions compared=5 -> FAIL
+[RESULT] Phase 2 random:   programs=20 failed=0 instructions compared=3091 -> PASS
+[RESULT] Phase 3 encodings: programs=200 failed=0 instructions compared=675 -> PASS
+
+== +BUG=4 ==
+[MISMATCH] one-instruction 1 (c8068e23), instruction 3: core pc=00000008 insn=c8068e23 mem[fffffc9c]<=00000000 next_pc=0000000c | ISS pc=00000008 insn=c8068e23 next_pc=0000000c
+[RESULT] Phase 1 directed: programs=1 failed=0 instructions compared=36 -> PASS
+[RESULT] Phase 2 random:   programs=20 failed=0 instructions compared=3091 -> PASS
+[RESULT] Phase 3 encodings: programs=200 failed=95 instructions compared=675 -> FAIL

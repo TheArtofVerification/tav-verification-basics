@@ -1,0 +1,4 @@
+Synopsys VCS X-2025.06-SP1, EDA Playground, 25 Nov 2026.
+
+Test A, 20 random programs: instructions=3290  first vs AI differences=0  fixed vs AI differences=0
+Test B, random encodings: instructions=20000  first vs AI differences=9973 (first ran it, AI stopped=9973, other=0)  fixed vs AI differences=0
