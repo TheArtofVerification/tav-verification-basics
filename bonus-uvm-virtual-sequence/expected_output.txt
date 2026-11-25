@@ -1,0 +1,92 @@
+tav_vseq_uvm.sv: expected output
+Synopsys VCS X-2025.06-SP1, UVM 1.2, EDA Playground, 25 Nov 2026. The UVM Report Summary is trimmed.
+
+=============================== (no option): clean ===============================
+UVM_INFO @ 0: reporter [RNTST] Running test tav_vseq_test...
+UVM_INFO testbench.sv(750) @ 0: uvm_test_top [TEST] Running with BUG=0
+UVM_INFO testbench.sv(518) @ 0: reporter [STEP] ---- 0. default_sequence: started by itself in configure ----
+UVM_INFO testbench.sv(522) @ 270: reporter [STEP] step 0 done at 250 | output order: AAAABBBB
+UVM_INFO testbench.sv(518) @ 270: reporter [STEP] ---- 1. approach 1: the sequence holds the handles, start(null) ----
+UVM_INFO testbench.sv(535) @ 270: reporter@@s1 [STEP] m_sequencer is null. This sequence runs on no sequencer.
+UVM_INFO testbench.sv(522) @ 450: reporter [STEP] step 1 done at 430 | output order: AAAABBBB
+UVM_INFO testbench.sv(518) @ 450: reporter [STEP] ---- 2. approach 2: a virtual sequencer, reached through p_sequencer ----
+UVM_INFO testbench.sv(587) @ 450: uvm_test_top.env.vsqr@@s2 [STEP] m_sequencer is uvm_test_top.env.vsqr, p_sequencer is a tav_vsqr
+UVM_INFO testbench.sv(522) @ 630: reporter [STEP] step 2 done at 610 | output order: AAAABBBB
+UVM_INFO testbench.sv(518) @ 630: reporter [STEP] ---- 3. serial vs fork/join ----
+UVM_INFO testbench.sv(522) @ 970: reporter [STEP] step 3a serial (A then B, 16 bytes) took 320 | output order: AAAAAAAABBBBBBBB
+UVM_INFO testbench.sv(522) @ 1160: reporter [STEP] step 3b fork/join (A and B together, 16 bytes) took 170 | output order: ABABABABABABABAB
+UVM_INFO testbench.sv(518) @ 1160: reporter [STEP] ---- 4. fork/join_any, then wait fork ----
+UVM_INFO testbench.sv(624) @ 1230: uvm_test_top.env.vsqr@@s4 [STEP] join_any returned at 1230: A (3 bytes) is done, B (9 bytes) is still sending. Output so far: BABAB
+UVM_INFO testbench.sv(522) @ 1360: reporter [STEP] step 4 wait fork returned at 1340 | output order: BABABABBBBBB
+UVM_INFO testbench.sv(518) @ 1360: reporter [STEP] ---- 5. nested virtual sequences ----
+UVM_INFO testbench.sv(655) @ 1510: uvm_test_top.env.vsqr@@s5 [STEP] children ran as uvm_test_top.env.vsqr.s5.rk and uvm_test_top.env.vsqr.s5.tr
+UVM_INFO testbench.sv(522) @ 1530: reporter [STEP] step 5 done at 1510 | output order: ABABABAB
+UVM_INFO testbench.sv(518) @ 1530: reporter [STEP] ---- 6. lock(): keep three writes together ----
+UVM_INFO testbench.sv(676) @ 1890: uvm_test_top.env.vsqr@@s6 [STEP] without lock: 2 poll reads got in between the 3 re-key writes
+UVM_INFO testbench.sv(678) @ 1890: uvm_test_top.env.vsqr@@s6 [STEP] with lock:    0 poll reads got in between the 3 re-key writes
+UVM_INFO testbench.sv(522) @ 1910: reporter [STEP] step 6 done at 1890, 6 poll reads in all | output order:
+UVM_INFO testbench.sv(518) @ 1910: reporter [STEP] ---- 7. grab() vs lock() ----
+UVM_INFO testbench.sv(704) @ 2090: uvm_test_top.env.vsqr@@s7 [STEP] order the APB sequencer was given out: lock_first, grab_later, then the poll (waiting since +5 ns)
+UVM_INFO testbench.sv(706) @ 2090: uvm_test_top.env.vsqr@@s7 [STEP] poll reads granted from the start of step 7 until the grab's last write: 0
+UVM_INFO testbench.sv(522) @ 2140: reporter [STEP] step 7 done at 2120 | output order:
+UVM_INFO testbench.sv(518) @ 2140: reporter [STEP] ---- 8. fork/join_none, then wait fork, then check the counters ----
+UVM_INFO testbench.sv(727) @ 2170: uvm_test_top.env.vsqr@@s8 [STEP] join_none returned at once. Meanwhile KEY reads 0x22 at 2170
+UVM_INFO testbench.sv(731) @ 2410: uvm_test_top.env.vsqr@@s8 [STEP] at 2410: CNT_A=45 (meant 45), CNT_B=51 (meant 51)
+UVM_INFO testbench.sv(522) @ 2430: reporter [STEP] step 8 done at 2410 | output order: BABABABABABABABABABA
+UVM_INFO testbench.sv(364) @ 3430: uvm_test_top.env.sb [SB] in: A=45 B=51 | out checked: 96 ok, 0 bad | dropped: 0
+UVM_INFO testbench.sv(790) @ 3430: uvm_test_top [RESULT] PASS: 0 errors
+UVM_INFO :   34   UVM_WARNING :    0   UVM_ERROR :    0   UVM_FATAL :    0
+
+=============================== +BUG=1: b_sqr never set ===============================
+UVM_INFO @ 0: reporter [RNTST] Running test tav_vseq_test...
+UVM_INFO testbench.sv(750) @ 0: uvm_test_top [TEST] Running with BUG=1
+UVM_FATAL testbench.sv(381) @ 0: uvm_test_top.env.vsqr [VSQR] b_sqr handle is null. Set it in the env's connect_phase.
+UVM_INFO :    3   UVM_WARNING :    0   UVM_ERROR :    0   UVM_FATAL :    1
+
+=============================== +BUG=2: setup and traffic forked ===============================
+UVM_INFO @ 0: reporter [RNTST] Running test tav_vseq_test...
+UVM_INFO testbench.sv(750) @ 0: uvm_test_top [TEST] Running with BUG=2
+UVM_INFO testbench.sv(518) @ 0: reporter [STEP] ---- 0. default_sequence: started by itself in configure ----
+UVM_ERROR testbench.sv(338) @ 45: uvm_test_top.env.sb [SB] A byte 0x00 went in while CTRL.en was 0, so the block dropped it. Traffic started before setup finished.
+UVM_ERROR testbench.sv(338) @ 65: uvm_test_top.env.sb [SB] A byte 0x01 went in while CTRL.en was 0, so the block dropped it. Traffic started before setup finished.
+UVM_ERROR testbench.sv(338) @ 85: uvm_test_top.env.sb [SB] A byte 0x02 went in while CTRL.en was 0, so the block dropped it. Traffic started before setup finished.
+UVM_INFO testbench.sv(522) @ 210: reporter [STEP] step 0 done at 190 | output order: ABBBB
+  (steps 1 to 7 as in the clean run, 60 ns earlier)
+UVM_INFO testbench.sv(731) @ 2350: uvm_test_top.env.vsqr@@s8 [STEP] at 2350: CNT_A=42 (meant 45), CNT_B=51 (meant 51)
+UVM_ERROR testbench.sv(734) @ 2350: uvm_test_top.env.vsqr@@s8 [CHECK] CNT_A is 42 but the virtual sequences sent 45 bytes to A
+UVM_INFO testbench.sv(522) @ 2370: reporter [STEP] step 8 done at 2350 | output order: BABABABABABABABABABA
+UVM_INFO testbench.sv(364) @ 3370: uvm_test_top.env.sb [SB] in: A=45 B=51 | out checked: 93 ok, 0 bad | dropped: 3
+UVM_INFO testbench.sv(790) @ 3370: uvm_test_top [RESULT] FAIL: 4 errors
+UVM_INFO :   34   UVM_WARNING :    0   UVM_ERROR :    4   UVM_FATAL :    0
+
+=============================== +BUG=3: join_none, no wait fork ===============================
+  (steps 0 to 7 exactly as in the clean run)
+UVM_INFO testbench.sv(518) @ 2140: reporter [STEP] ---- 8. fork/join_none, then wait fork, then check the counters ----
+UVM_INFO testbench.sv(727) @ 2170: uvm_test_top.env.vsqr@@s8 [STEP] join_none returned at once. Meanwhile KEY reads 0x22 at 2170
+UVM_INFO testbench.sv(731) @ 2230: uvm_test_top.env.vsqr@@s8 [STEP] at 2230: CNT_A=37 (meant 45), CNT_B=45 (meant 51)
+UVM_ERROR testbench.sv(734) @ 2230: uvm_test_top.env.vsqr@@s8 [CHECK] CNT_A is 37 but the virtual sequences sent 45 bytes to A
+UVM_ERROR testbench.sv(736) @ 2230: uvm_test_top.env.vsqr@@s8 [CHECK] CNT_B is 45 but the virtual sequences sent 51 bytes to B
+UVM_INFO testbench.sv(522) @ 2250: reporter [STEP] step 8 done at 2230 | output order: BABABABAB
+UVM_INFO testbench.sv(364) @ 3250: uvm_test_top.env.sb [SB] in: A=45 B=51 | out checked: 96 ok, 0 bad | dropped: 0
+UVM_INFO testbench.sv(790) @ 3250: uvm_test_top [RESULT] FAIL: 2 errors
+UVM_INFO :   34   UVM_WARNING :    0   UVM_ERROR :    2   UVM_FATAL :    0
+
+=============================== +BUG=4: b_sqr points at A ===============================
+UVM_INFO testbench.sv(750) @ 0: uvm_test_top [TEST] Running with BUG=4
+UVM_INFO testbench.sv(518) @ 0: reporter [STEP] ---- 0. default_sequence: started by itself in configure ----
+UVM_INFO testbench.sv(522) @ 270: reporter [STEP] step 0 done at 250 | output order: AAAAAAAA
+UVM_INFO testbench.sv(522) @ 450: reporter [STEP] step 1 done at 430 | output order: AAAABBBB
+UVM_INFO testbench.sv(522) @ 630: reporter [STEP] step 2 done at 610 | output order: AAAAAAAA
+UVM_INFO testbench.sv(522) @ 970: reporter [STEP] step 3a serial (A then B, 16 bytes) took 320 | output order: AAAAAAAAAAAAAAAA
+UVM_INFO testbench.sv(522) @ 1310: reporter [STEP] step 3b fork/join (A and B together, 16 bytes) took 320 | output order: AAAAAAAAAAAAAAAA
+UVM_INFO testbench.sv(624) @ 1410: uvm_test_top.env.vsqr@@s4 [STEP] join_any returned at 1410: A (3 bytes) is done, B (9 bytes) is still sending. Output so far: AAAA
+UVM_INFO testbench.sv(522) @ 1570: reporter [STEP] step 4 wait fork returned at 1550 | output order: AAAAAAAAAAAA
+UVM_INFO testbench.sv(522) @ 1810: reporter [STEP] step 5 done at 1790 | output order: AAAAAAAA
+  (steps 6 and 7 as in the clean run)
+UVM_INFO testbench.sv(731) @ 2880: uvm_test_top.env.vsqr@@s8 [STEP] at 2880: CNT_A=92 (meant 45), CNT_B=4 (meant 51)
+UVM_ERROR testbench.sv(734) @ 2880: uvm_test_top.env.vsqr@@s8 [CHECK] CNT_A is 92 but the virtual sequences sent 45 bytes to A
+UVM_ERROR testbench.sv(736) @ 2880: uvm_test_top.env.vsqr@@s8 [CHECK] CNT_B is 4 but the virtual sequences sent 51 bytes to B
+UVM_INFO testbench.sv(522) @ 2900: reporter [STEP] step 8 done at 2880 | output order: AAAAAAAAAAAAAAAAAAAA
+UVM_INFO testbench.sv(364) @ 3900: uvm_test_top.env.sb [SB] in: A=92 B=4 | out checked: 96 ok, 0 bad | dropped: 0
+UVM_INFO testbench.sv(790) @ 3900: uvm_test_top [RESULT] FAIL: 2 errors
+UVM_INFO :   34   UVM_WARNING :    0   UVM_ERROR :    2   UVM_FATAL :    0
