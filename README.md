@@ -26,6 +26,7 @@ Each lesson takes one small design, plants bugs in it, and shows a bench finding
 | [RISC-V Verification: Check Every Instruction Against an ISS Golden Model](https://theartofverification.com/risc-v-verification/) | [`bonus-risc-v-verification`](bonus-risc-v-verification/) |
 | [SoC Verification: The Key Areas, and How to Check the Glue Between IPs](https://theartofverification.com/soc-verification/) | [`bonus-soc-verification`](bonus-soc-verification/) |
 | [UVM RAL: A Complete Guide With a Working APB Example](https://theartofverification.com/uvm-ral/) | [`bonus-uvm-ral`](bonus-uvm-ral/) |
+| [UVM Virtual Sequence and Virtual Sequencer: A Complete Guide With a Working Example](https://theartofverification.com/uvm-virtual-sequence/) | [`bonus-uvm-virtual-sequence`](bonus-uvm-virtual-sequence/) |
 
 ## How to run any demo
 
