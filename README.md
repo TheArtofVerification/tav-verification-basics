@@ -25,6 +25,7 @@ Each lesson takes one small design, plants bugs in it, and shows a bench finding
 | [Clock Multiplication vs Division: How Each Works and How to Verify It](https://theartofverification.com/clock-multiplication-vs-division/) | [`bonus-clock-multiplication-vs-division`](bonus-clock-multiplication-vs-division/) |
 | [RISC-V Verification: Check Every Instruction Against an ISS Golden Model](https://theartofverification.com/risc-v-verification/) | [`bonus-risc-v-verification`](bonus-risc-v-verification/) |
 | [SoC Verification: The Key Areas, and How to Check the Glue Between IPs](https://theartofverification.com/soc-verification/) | [`bonus-soc-verification`](bonus-soc-verification/) |
+| [UVM RAL: A Complete Guide With a Working APB Example](https://theartofverification.com/uvm-ral/) | [`bonus-uvm-ral`](bonus-uvm-ral/) |
 
 ## How to run any demo
 
